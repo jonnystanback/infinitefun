@@ -166,9 +166,19 @@ function initCarousel() {
       img.addEventListener("error", onOne, { once: true });
     }
   });
-  // Safety: in case some image stalls, force reveal after 6s
-  setTimeout(scheduleReveal, 6000);
+  // Safety: in case some image stalls (slow mobile network etc.), force
+  // reveal after 12s. Better to show a partial carousel than a stuck loader.
+  setTimeout(scheduleReveal, 12000);
 }
+
+// Absolute last-resort: if anything in the boot chain stalls (SVG fetch
+// failure, carousel never builds, etc.), unlock scroll and dismiss the
+// loader after 14s no matter what.
+setTimeout(() => {
+  document.body.classList.remove("is-booting");
+  const ld = document.getElementById("page-loader");
+  if (ld) ld.style.opacity = "0";
+}, 14000);
 
 initCarousel();
 
