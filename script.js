@@ -127,111 +127,30 @@ function buildRow(track, files) {
 
 function initCarousel() {
   const stack = document.getElementById("carousel-stack");
-  if (!stack) return;
-  const gridEl = document.getElementById("puzzle-grid");
-  if (!gridEl) return;
+  if (!stack) {
+    setTimeout(() => document.body.classList.remove("is-booting"), 3100);
+    return;
+  }
+  const rows = stack.querySelectorAll(".carousel-row");
+  const tracks = stack.querySelectorAll(".carousel-track");
+  if (tracks.length === 0) {
+    setTimeout(() => document.body.classList.remove("is-booting"), 3100);
+    return;
+  }
 
   stack.classList.add("is-loading");
 
-  const COLS = 12;
-  const ROWS = 2;
-  const TOTAL = COLS * ROWS;       // 24 slots
-  const TILE_COUNT = TOTAL - 1;    // 23 tiles + 1 empty
-  const pickedFiles = shuffle(CAROUSEL_FILES.slice()).slice(0, TILE_COUNT);
+  const groups = splitIntoRows(CAROUSEL_FILES, tracks.length);
+  tracks.forEach((track, i) => buildRow(track, groups[i]));
 
-  // 2D grid of cell elements; null marks the empty slot
-  const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
-  let empty = {
-    r: (Math.random() * ROWS) | 0,
-    c: (Math.random() * COLS) | 0,
-  };
+  rows.forEach((row) => {
+    const speed = parseFloat(row.dataset.speed) || 90;
+    const track = row.querySelector(".carousel-track");
+    if (track) track.style.setProperty("--dur", `${speed}s`);
+  });
 
-  function placeCell(cell, r, c) {
-    cell.style.top = `${r * (100 / ROWS)}%`;
-    cell.style.left = `${c * (100 / COLS)}%`;
-  }
-
-  let fIdx = 0;
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      if (r === empty.r && c === empty.c) continue;
-      const cell = document.createElement("div");
-      cell.className = "puzzle-cell";
-      placeCell(cell, r, c);
-      const img = document.createElement("img");
-      const baseNoExt = pickedFiles[fIdx++].replace(/\.(png|jpe?g)$/i, "");
-      img.src = `${CAROUSEL_FOLDER}/${encodeURIComponent(baseNoExt)}.jpg`;
-      img.alt = "";
-      img.decoding = "async";
-      img.fetchPriority = "high";
-      cell.appendChild(img);
-      gridEl.appendChild(cell);
-      grid[r][c] = cell;
-    }
-  }
-
-  // True sliding-puzzle motion: pick a direction, slide N adjacent tiles
-  // toward the empty slot as a line. No tile ever jumps another.
-  const DIRECTIONS = [
-    { dr: 0, dc: -1 }, // empty pulls from the left  → tiles shift right
-    { dr: 0, dc:  1 }, // empty pulls from the right → tiles shift left
-    { dr: -1, dc: 0 }, // up
-    { dr:  1, dc: 0 }, // down
-  ];
-
-  function tickPuzzle() {
-    // Build the list of viable directions (need at least one tile to slide)
-    const choices = [];
-    for (const d of DIRECTIONS) {
-      const sr = empty.r + d.dr;
-      const sc = empty.c + d.dc;
-      if (sr >= 0 && sr < ROWS && sc >= 0 && sc < COLS && grid[sr][sc]) {
-        choices.push(d);
-      }
-    }
-    if (choices.length === 0) return;
-    const dir = choices[(Math.random() * choices.length) | 0];
-
-    // Walk in the chosen direction from the empty slot, collecting tiles
-    // until we hit a wall or a (shouldn't happen) gap.
-    const line = [];
-    let r = empty.r + dir.dr, c = empty.c + dir.dc;
-    while (r >= 0 && r < ROWS && c >= 0 && c < COLS && grid[r][c]) {
-      line.push({ r, c, cell: grid[r][c] });
-      r += dir.dr; c += dir.dc;
-    }
-
-    // Pick how many tiles in the line slide together (1 to min(line.length, 5))
-    const maxN = Math.min(line.length, 5);
-    const n = 1 + ((Math.random() * maxN) | 0);
-    const moving = line.slice(0, n);
-
-    // Compute new positions (one step toward empty = opposite of walk dir)
-    const moves = moving.map((t) => ({
-      cell: t.cell,
-      from: { r: t.r, c: t.c },
-      to:   { r: t.r - dir.dr, c: t.c - dir.dc },
-    }));
-
-    // Clear old slots first, then write new slots — order matters because
-    // a tile may be moving into another moving tile's old slot.
-    for (const m of moves) grid[m.from.r][m.from.c] = null;
-    for (const m of moves) {
-      grid[m.to.r][m.to.c] = m.cell;
-      placeCell(m.cell, m.to.r, m.to.c);
-    }
-
-    // New empty is where the last tile in the slid line used to sit
-    const last = moves[moves.length - 1].from;
-    empty = { r: last.r, c: last.c };
-  }
-
-  setInterval(tickPuzzle, 1400);
-  // First slide kicks off a beat after the loader dismisses to feel intentional
-  setTimeout(tickPuzzle, 600);
-
-  // Reveal once every image has loaded — but enforce a minimum display time
-  // for the loader so it doesn't just flicker through on fast networks.
+  // Reveal once every image has loaded — but enforce a minimum display
+  // so the loader animation can complete.
   const LOADER_MIN_MS = 3100;
   const loadStart = performance.now();
   const imgs = Array.from(stack.querySelectorAll("img"));
@@ -258,8 +177,7 @@ function initCarousel() {
       img.addEventListener("error", onOne, { once: true });
     }
   });
-  // Safety: in case some image stalls or fails, force reveal after 20s.
-  // Long enough that mobile cellular usually finishes the carousel first.
+  // Safety: slow networks
   setTimeout(scheduleReveal, 20000);
 }
 
