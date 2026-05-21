@@ -769,15 +769,15 @@ body.with-footer > main {
 
   /* Black box thesis — generous side padding, narrower text column */
   #thesis { padding: 36px 0 0; }
-  .thesis-card { padding: 48px 44px; border-radius: 18px; }
-  .thesis-label { font-size: 14px; margin-bottom: 24px; }
-  .thesis-headline { font-size: clamp(28px, 8vw, 44px); margin-bottom: 32px; }
+  .thesis-card { padding: 48px 44px 72px; border-radius: 18px; }
+  .thesis-label { font-size: 20px; margin-bottom: 28px; }
+  .thesis-headline { font-size: clamp(34px, 9vw, 52px); margin-bottom: 32px; }
   .thesis-body { gap: 18px; max-width: 320px; }
   .thesis-body p { font-size: 20px; line-height: 1.35; }
 
   /* Founders / "about us" — sits close beneath the black box, narrower body */
   #founders { padding: 36px 44px 0; gap: 20px; }
-  .founders-headline { font-size: clamp(28px, 8vw, 44px); }
+  .founders-headline { font-size: clamp(34px, 9vw, 52px); }
   .founders-sub { font-size: 18px; }
   .pfp img { width: 130px; height: 130px; }
   .pfp figcaption { font-size: 12px; }
