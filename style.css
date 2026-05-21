@@ -283,25 +283,27 @@ body.with-footer > main {
 .cta--green { background: var(--accent); color: var(--ink); }
 .cta--green .cta-arrow { background: var(--ink); color: #fff; }
 
-/* ---------- shuffling puzzle grid (replaces carousel) ---------- */
+/* ---------- sliding puzzle grid ---------- */
 .puzzle-grid {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  /* 12 cols × 2 rows = 6:1 aspect — long horizontal strip */
+  aspect-ratio: 12 / 2;
   background: #d0d0d0;
   overflow: hidden;
+  /* Cell sizing as CSS vars so JS uses the same numbers */
+  --cols: 12;
+  --rows: 2;
 }
 .puzzle-cell {
   position: absolute;
-  width: 25%;          /* 4 columns */
-  height: 33.3333%;    /* 3 rows */
-  padding: 0;
-  margin: 0;
+  width: calc(100% / var(--cols));
+  height: calc(100% / var(--rows));
   background: #fff;
   border: 0.5px solid #d0d0d0;
   box-sizing: border-box;
-  transition: top 0.75s cubic-bezier(.4,.0,.2,1),
-              left 0.75s cubic-bezier(.4,.0,.2,1);
+  transition: top 0.7s cubic-bezier(.55,.085,.32,1),
+              left 0.7s cubic-bezier(.55,.085,.32,1);
   will-change: top, left;
 }
 .puzzle-cell img {
