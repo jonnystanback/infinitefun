@@ -220,8 +220,6 @@ body.with-footer > main {
   align-items: flex-start;
   text-align: left;
   gap: clamp(32px, 5vh, 56px);
-  /* Clip the rotated carousel within the hero section */
-  overflow: hidden;
 }
 
 .hero-headline {
@@ -287,16 +285,12 @@ body.with-footer > main {
 
 /* ---------- carousel ---------- */
 .carousel-stack {
-  /* Oversize so the rotated diagonal still covers the viewport edge-to-edge */
-  width: 116%;
-  margin-left: -8%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-top: clamp(8px, 1.5vh, 24px);
   transition: opacity 0.6s ease;
-  transform: rotate(-6deg);
-  transform-origin: center center;
 }
 .carousel-stack.is-loading {
   opacity: 0;
