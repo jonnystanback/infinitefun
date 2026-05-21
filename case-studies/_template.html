@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Infinite Fun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .cs-page {
+      min-height: 100vh;
+      padding: 80px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .cs-back {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+    .cs-back:hover { opacity: 0.6; }
+    .cs-page h1 {
+      margin: 0 0 16px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: clamp(36px, 5vw, 64px);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .cs-page .placeholder {
+      font-family: var(--sans);
+      font-size: 18px;
+      color: var(--muted);
+      letter-spacing: -0.02em;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="logo" href="../" aria-label="Infinite Fun home">
+      <img src="../assets/iflogo.png" alt="Infinite Fun" />
+    </a>
+    <a class="nav-link" href="../#work">Work</a>
+    <a class="nav-link" href="../#about">About</a>
+    <a class="nav-link" href="../#pricing">Pricing</a>
+    <a class="nav-link" href="../#inquire">Inquire</a>
+  </header>
+
+  <main class="cs-page">
+    <a href="../" class="cs-back">← Back to work</a>
+    <h1>{{TITLE}}</h1>
+    <p class="placeholder">Case study content coming soon.</p>
+  </main>
+</body>
+</html>

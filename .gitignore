@@ -1,0 +1,10 @@
+.DS_Store
+*.bak
+.env
+.env.local
+node_modules/
+.vscode/
+.idea/
+
+# Design reference only — not part of the deliverable site
+assets/mockup.jpg
