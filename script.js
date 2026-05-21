@@ -128,22 +128,49 @@ function buildRow(track, files) {
 function initCarousel() {
   const stack = document.getElementById("carousel-stack");
   if (!stack) return;
-  const rows = stack.querySelectorAll(".carousel-row");
-  const tracks = stack.querySelectorAll(".carousel-track");
-  if (tracks.length === 0) return;
+  const grid = document.getElementById("puzzle-grid");
+  if (!grid) return;
 
-  // Hide the stack until everything's ready so we don't show blank tiles
-  // appearing in a half-scrolled animation.
+  // Hide until images load so we don't show a half-populated grid.
   stack.classList.add("is-loading");
 
-  const groups = splitIntoRows(CAROUSEL_FILES, tracks.length);
-  tracks.forEach((track, i) => buildRow(track, groups[i]));
+  // 4 × 3 puzzle grid. Pick the first 12 files (shuffled).
+  const COLS = 4;
+  const ROWS = 3;
+  const TOTAL = COLS * ROWS;
+  const pickedFiles = shuffle(CAROUSEL_FILES).slice(0, TOTAL);
 
-  rows.forEach((row) => {
-    const speed = parseFloat(row.dataset.speed) || 90;
-    const track = row.querySelector(".carousel-track");
-    if (track) track.style.setProperty("--dur", `${speed}s`);
-  });
+  const cells = [];
+  for (let i = 0; i < TOTAL; i++) {
+    const row = Math.floor(i / COLS);
+    const col = i % COLS;
+    const cell = document.createElement("div");
+    cell.className = "puzzle-cell";
+    cell.style.top = `${row * (100 / ROWS)}%`;
+    cell.style.left = `${col * (100 / COLS)}%`;
+
+    const img = document.createElement("img");
+    const baseNoExt = pickedFiles[i].replace(/\.(png|jpe?g)$/i, "");
+    img.src = `${CAROUSEL_FOLDER}/${encodeURIComponent(baseNoExt)}.jpg`;
+    img.alt = "";
+    img.decoding = "async";
+    img.fetchPriority = "high";
+    cell.appendChild(img);
+    grid.appendChild(cell);
+    cells.push(cell);
+  }
+
+  // Slow shuffle: every 1.5s pick two random tiles and swap their positions.
+  setInterval(() => {
+    const a = (Math.random() * cells.length) | 0;
+    let b = (Math.random() * cells.length) | 0;
+    if (b === a) b = (b + 1) % cells.length;
+    const ta = cells[a].style.top, la = cells[a].style.left;
+    cells[a].style.top = cells[b].style.top;
+    cells[a].style.left = cells[b].style.left;
+    cells[b].style.top = ta;
+    cells[b].style.left = la;
+  }, 1500);
 
   // Reveal once every image has loaded — but enforce a minimum display time
   // for the loader so it doesn't just flicker through on fast networks.
