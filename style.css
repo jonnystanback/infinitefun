@@ -767,21 +767,22 @@ body.with-footer > main {
   .carousel-track { gap: 10px; }
   .carousel-track img { height: clamp(60px, 14vw, 85px); border-radius: 8px; }
 
-  /* Black box thesis — more side padding so text doesn't hit edges */
+  /* Black box thesis — generous side padding, narrower text column */
   #thesis { padding: 36px 0 0; }
-  .thesis-card { padding: 48px 32px; border-radius: 18px; }
+  .thesis-card { padding: 48px 44px; border-radius: 18px; }
   .thesis-label { font-size: 14px; margin-bottom: 24px; }
   .thesis-headline { font-size: clamp(28px, 8vw, 44px); margin-bottom: 32px; }
-  .thesis-body { gap: 18px; }
-  .thesis-body p { font-size: 17px; line-height: 1.4; }
+  .thesis-body { gap: 18px; max-width: 320px; }
+  .thesis-body p { font-size: 20px; line-height: 1.35; }
 
-  /* Founders / "about us" — more horizontal breathing room */
-  #founders { padding: 100px 32px 0; gap: 20px; }
+  /* Founders / "about us" — sits close beneath the black box, narrower body */
+  #founders { padding: 36px 44px 0; gap: 20px; }
   .founders-headline { font-size: clamp(28px, 8vw, 44px); }
   .founders-sub { font-size: 18px; }
   .pfp img { width: 130px; height: 130px; }
   .pfp figcaption { font-size: 12px; }
-  .founders-body p { font-size: 17px; }
+  .founders-body { max-width: 320px; }
+  .founders-body p { font-size: 20px; line-height: 1.35; }
 
   /* Case studies — single column stack, View All at the bottom */
   #case-studies { padding: 32px 16px 56px; }
@@ -790,7 +791,8 @@ body.with-footer > main {
   .cs-tile { aspect-ratio: 16 / 9; }
   .cs-view-all-top { display: none; }
   .cs-view-all-bottom {
-    display: inline-flex;
+    display: flex;
+    width: max-content;
     margin: 24px auto 0;
   }
 
