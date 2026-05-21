@@ -554,6 +554,9 @@ body.with-footer > main {
 /* Bottom "View All" is hidden on desktop — shown on mobile in its place */
 .cs-view-all-bottom { display: none; }
 
+/* <br> that only renders on mobile (for "We're / Graham & Jonny" break) */
+.break-mobile { display: none; }
+
 /* small CTA variant for the View All button */
 .cta--small {
   font-size: 12px;
@@ -783,6 +786,7 @@ body.with-footer > main {
   .pfp figcaption { font-size: 12px; }
   .founders-body { max-width: 320px; }
   .founders-body p { font-size: 20px; line-height: 1.35; }
+  .break-mobile { display: initial; }
 
   /* Case studies — single column stack, View All at the bottom */
   #case-studies { padding: 32px 16px 56px; }
