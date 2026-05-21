@@ -101,18 +101,25 @@ function splitIntoRows(items, rowCount) {
   return rows.map((r) => shuffle(r));
 }
 
+// Resolved once per page load — mobile gets the smaller 220px-tall set,
+// desktop gets the 360px set.
+const CAROUSEL_FOLDER =
+  window.matchMedia("(max-width: 720px)").matches
+    ? "assets/carousel/sm-mobile"
+    : "assets/carousel/sm";
+
 function buildRow(track, files) {
   // Duplicate the file list so the marquee can translate -50% → 0
   // (or 0 → -50%) and loop seamlessly.
   const sequence = files.concat(files);
   const frag = document.createDocumentFragment();
   for (const f of sequence) {
-    // Use the compressed JPG version from assets/carousel/sm/
     const baseNoExt = f.replace(/\.(png|jpe?g)$/i, "");
     const img = document.createElement("img");
-    img.src = `assets/carousel/sm/${encodeURIComponent(baseNoExt)}.jpg`;
+    img.src = `${CAROUSEL_FOLDER}/${encodeURIComponent(baseNoExt)}.jpg`;
     img.alt = "";
     img.decoding = "async";
+    img.fetchPriority = "high";
     frag.appendChild(img);
   }
   track.appendChild(frag);
