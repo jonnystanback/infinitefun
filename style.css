@@ -551,6 +551,9 @@ body.with-footer > main {
 .cs-tile:hover img,
 .cs-tile:hover video { transform: scale(1.04); }
 
+/* Bottom "View All" is hidden on desktop — shown on mobile in its place */
+.cs-view-all-bottom { display: none; }
+
 /* small CTA variant for the View All button */
 .cta--small {
   font-size: 12px;
@@ -748,51 +751,73 @@ body.with-footer > main {
 
 /* ---------- responsive ---------- */
 @media (max-width: 720px) {
-  .site-nav { padding: 0 18px; height: 64px; }
-  .site-nav .logo img { height: 18px; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 13px; }
+  /* Header — smaller logo + smaller nav text */
+  .site-nav { padding: 0 16px; height: 54px; }
+  .site-nav .logo img { height: 12px; }
+  .nav-link { font-size: 9.5px; }
 
-  #hero { padding: 32px 18px 40px; gap: 28px; }
+  /* Hero */
+  #hero { padding: 28px 22px 36px; gap: 24px; }
   .hero-headline { font-size: clamp(34px, 9vw, 52px); }
   .cta { font-size: 15px; padding: 10px 12px 10px 22px; }
   .cta-arrow { width: 30px; height: 30px; }
 
+  /* Carousel */
   .carousel-stack { gap: 10px; margin-top: 4px; }
   .carousel-track { gap: 10px; }
   .carousel-track img { height: clamp(60px, 14vw, 85px); border-radius: 8px; }
 
+  /* Black box thesis — more side padding so text doesn't hit edges */
   #thesis { padding: 36px 0 0; }
-  .thesis-card { padding: 44px 22px; border-radius: 18px; }
+  .thesis-card { padding: 48px 32px; border-radius: 18px; }
   .thesis-label { font-size: 14px; margin-bottom: 24px; }
   .thesis-headline { font-size: clamp(28px, 8vw, 44px); margin-bottom: 32px; }
   .thesis-body { gap: 18px; }
-  .thesis-body p { font-size: 18px; line-height: 1.4; }
+  .thesis-body p { font-size: 17px; line-height: 1.4; }
 
-  #founders { padding: 120px 18px 0; gap: 20px; }
+  /* Founders / "about us" — more horizontal breathing room */
+  #founders { padding: 100px 32px 0; gap: 20px; }
   .founders-headline { font-size: clamp(28px, 8vw, 44px); }
   .founders-sub { font-size: 18px; }
-  .pfp img { width: 143px; height: 143px; }
+  .pfp img { width: 130px; height: 130px; }
   .pfp figcaption { font-size: 12px; }
-  .founders-body p { font-size: 18px; }
+  .founders-body p { font-size: 17px; }
 
-  #case-studies { padding: 32px 16px 48px; }
+  /* Case studies — single column stack, View All at the bottom */
+  #case-studies { padding: 32px 16px 56px; }
   .cs-title { font-size: 26px; }
-  .cs-grid { gap: 10px; }
+  .cs-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cs-tile { aspect-ratio: 16 / 9; }
+  .cs-view-all-top { display: none; }
+  .cs-view-all-bottom {
+    display: inline-flex;
+    margin: 24px auto 0;
+  }
 
+  /* Pricing — smaller titles so they don't push the CTAs around */
   #pricing { padding: 40px 16px 48px; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-card { min-height: 0; padding: 22px; gap: 28px; }
-  .pricing-title { font-size: 28px; }
+  .pricing-card { min-height: 0; padding: 22px; gap: 24px; }
+  .pricing-head { gap: 12px; }
+  .pricing-title { font-size: 22px; max-width: 55%; }
+  .pricing-cta, .pricing-card .cta {
+    font-size: 13px;
+    padding: 8px 8px 8px 16px;
+    gap: 8px;
+  }
+  .pricing-card .cta-arrow { width: 26px; height: 26px; }
   .pricing-timeline, .pricing-price, .pricing-desc { font-size: 15px; }
   .pricing-info { grid-template-columns: 1fr 1.4fr; gap: 14px; }
 
-  #testimonials { padding: 40px 16px 56px; }
+  /* Testimonials — much smaller cards + tighter section */
+  #testimonials { padding: 28px 16px 36px; }
+  .section-label { font-size: 22px; margin-bottom: 14px; }
   .testimonial-marquee { margin-inline: -16px; padding-inline: 16px; }
-  .testimonial-track { gap: 14px; }
-  .testimonial-card { padding: 22px; width: min(360px, 84vw); }
-  .testimonial-pfp { width: 48px; height: 48px; }
-  .testimonial-name { font-size: 18px; }
-  .testimonial-title { font-size: 18px; }
-  .testimonial-body { font-size: 18px; }
+  .testimonial-track { gap: 12px; }
+  .testimonial-card { padding: 18px; width: min(280px, 76vw); border-radius: 12px; }
+  .testimonial-pfp { width: 38px; height: 38px; }
+  .testimonial-head { gap: 10px; margin-bottom: 12px; }
+  .testimonial-name { font-size: 14px; }
+  .testimonial-title { font-size: 14px; }
+  .testimonial-body { font-size: 14px; line-height: 1.4; }
 }
