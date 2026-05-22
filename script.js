@@ -72,14 +72,21 @@
 // 3 rows of marquee, each row is a single pre-baked WebP strip duplicated
 // twice so translate -50% → 0 loops seamlessly.
 
+const IS_MOBILE = window.matchMedia("(max-width: 720px)").matches;
+const STRIP_FOLDER = IS_MOBILE
+  ? "assets/carousel/strips-mobile"
+  : "assets/carousel/strips";
+const STRIP_EXT = IS_MOBILE ? "jpg" : "webp";
+
 const CAROUSEL_STRIPS = [
-  "Group 37290.webp",
-  "Group 37291.webp",
-  "Group 37292.webp",
+  "Group 37290",
+  "Group 37291",
+  "Group 37292",
 ];
 
-function buildStripRow(track, file) {
-  const url = `assets/carousel/strips/${encodeURIComponent(file)}`;
+function buildStripRow(track, baseName) {
+  const file = `${baseName}.${STRIP_EXT}`;
+  const url = `${STRIP_FOLDER}/${encodeURIComponent(file)}`;
   for (let i = 0; i < 2; i++) {
     const img = document.createElement("img");
     img.src = url;
