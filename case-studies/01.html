@@ -3,45 +3,210 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Infinite Fun</title>
+  <title>Counterparty — Infinite Fun</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .cs-page {
-      min-height: 100vh;
-      padding: 80px 32px;
-      max-width: 900px;
+    /* ---------- Case study page ---------- */
+    body { background: #000; color: #fff; }
+
+    /* Nav over black: invert the logo, white links */
+    body .site-nav { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); }
+    body .site-nav .logo img { filter: invert(1); }
+    body .nav-link { color: #fff; }
+    body .nav-link:hover { opacity: 0.6; }
+
+    .case-page { width: 100%; }
+
+    /* Hero video — full bleed */
+    .cs-hero {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+      overflow: hidden;
+      position: relative;
+    }
+    .cs-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Intro: title row, thin divider, then services grid below */
+    .cs-intro {
+      width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
+      padding: clamp(72px, 10vh, 120px) clamp(24px, 4vw, 80px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 5vh, 56px);
     }
-    .cs-back {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      display: inline-block;
-      margin-bottom: 40px;
-    }
-    .cs-back:hover { opacity: 0.6; }
-    .cs-page h1 {
-      margin: 0 0 16px;
+    .cs-intro h1 {
+      margin: 0;
       font-family: var(--sans);
       font-weight: 500;
-      font-size: clamp(36px, 5vw, 64px);
+      font-size: clamp(32px, 4.6vw, 76px);
+      line-height: 1.06;
       letter-spacing: -0.03em;
-      line-height: 1;
+      color: #fff;
+      max-width: none;
+      text-align: left;
     }
-    .cs-page .placeholder {
+    .cs-intro h1 .serif {
+      font-family: var(--serif);
+      font-style: normal;
+      font-weight: 400;
+      /* slightly bigger than the surrounding Helvetica Neue */
+      font-size: 1.16em;
+      letter-spacing: -0.01em;
+      padding: 0 0.02em;
+    }
+    .cs-intro-divider {
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      border: 0;
+      margin: 0;
+    }
+    .cs-services {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      /* 9 items in 2 rows → 5 columns */
+      grid-template-columns: repeat(5, 1fr);
+      grid-auto-rows: auto;
+      column-gap: clamp(20px, 3vw, 56px);
+      row-gap: 12px;
+    }
+    .cs-services li {
       font-family: var(--sans);
-      font-size: 18px;
-      color: var(--muted);
+      font-weight: 400;
+      font-size: 15px;
       letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .cs-services li::before {
+      content: "—  ";
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Bento gallery */
+    .cs-bento {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 1.4vw, 22px);
+      padding: 0 clamp(16px, 2vw, 40px) clamp(80px, 12vh, 160px);
+    }
+    .cs-block {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .cs-block img,
+    .cs-block video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Wide wordmark banner — let the asset's navy field fill */
+    .cs-block--wordmark {
+      aspect-ratio: 3 / 1;
+      background: #082659;
+    }
+    .cs-block--wordmark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Side-by-side row of two equal-aspect blocks (face + coin) */
+    .cs-block-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-block--face,
+    .cs-block--coin {
+      aspect-ratio: 1 / 1;
+      background: #082659;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cs-block--face img,
+    .cs-block--coin img {
+      width: auto;
+      height: 60%;
+      object-fit: contain;
+    }
+
+    /* Color swatches row */
+    .cs-colors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(12px, 1.4vw, 22px);
+      padding: 0;
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
+    }
+    .cs-color {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      width: 100%;
+    }
+    .cs-color[data-name="color1"] { background: #041531; }
+    .cs-color[data-name="color2"] { background: #082659; }
+    .cs-color[data-name="color3"] { background: #E8E3D2; }
+    .cs-color[data-name="color4"] { background: #C6C6C6; }
+
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      margin: clamp(40px, 6vh, 80px) auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      width: fit-content;
+      transition: background-color 0.2s ease;
+    }
+    .cs-back:hover { background: rgba(255, 255, 255, 0.08); }
+
+    @media (max-width: 720px) {
+      .cs-intro { gap: 24px; padding: 48px 22px; }
+      .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
+      .cs-services {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 18px;
+        row-gap: 8px;
+      }
+      .cs-services li { font-size: 13px; }
+      .cs-bento { padding: 0 14px 80px; gap: 12px; }
+      .cs-block { border-radius: 10px; }
+      .cs-block--wordmark { aspect-ratio: 2.6 / 1; }
+      .cs-block--face,
+      .cs-block--coin { aspect-ratio: 1 / 1; }
+      .cs-block--face img,
+      .cs-block--coin img { height: 58%; }
+      .cs-colors { gap: 10px; }
     }
   </style>
 </head>
-<body>
+<body class="case-study">
   <header class="site-nav">
     <a class="logo" href="../" aria-label="Infinite Fun home">
       <img src="../assets/iflogo.png" alt="Infinite Fun" />
@@ -52,10 +217,65 @@
     <a class="nav-link" href="../#inquire">Inquire</a>
   </header>
 
-  <main class="cs-page">
-    <a href="../" class="cs-back">← Back to work</a>
-    <h1>Case Study 01</h1>
-    <p class="placeholder">Case study content coming soon.</p>
+  <main class="case-page">
+    <section class="cs-hero">
+      <video src="../assets/counterparty/hero.mp4"
+             autoplay muted loop playsinline preload="auto"></video>
+    </section>
+
+    <section class="cs-intro">
+      <h1>We did a complete overhaul of <span class="serif">Counterparty</span> for their new launch.</h1>
+      <hr class="cs-intro-divider" />
+      <ul class="cs-services">
+        <li>Brand Identity</li>
+        <li>Digital Design</li>
+        <li>Animation</li>
+        <li>Stream Overlay</li>
+        <li>3D Design</li>
+        <li>Social Templates</li>
+        <li>Social Banners</li>
+        <li>Video</li>
+        <li>Motion Graphics</li>
+      </ul>
+    </section>
+
+    <section class="cs-bento">
+      <div class="cs-block cs-block--wordmark">
+        <img src="../assets/counterparty/wordmark.png" alt="Counterparty wordmark" />
+      </div>
+
+      <div class="cs-block-row">
+        <div class="cs-block cs-block--face">
+          <img src="../assets/counterparty/face.png" alt="Counterparty Janus mark" />
+        </div>
+        <div class="cs-block cs-block--coin">
+          <img src="../assets/counterparty/Frame%20341.png" alt="Counterparty coin" />
+        </div>
+      </div>
+
+      <div class="cs-colors">
+        <div class="cs-color" data-name="color1" aria-label="#041531"></div>
+        <div class="cs-color" data-name="color2" aria-label="#082659"></div>
+        <div class="cs-color" data-name="color3" aria-label="#E8E3D2"></div>
+        <div class="cs-color" data-name="color4" aria-label="#C6C6C6"></div>
+      </div>
+
+      <div class="cs-block">
+        <img src="../assets/counterparty/flyers.png" alt="Counterparty flyer series" />
+      </div>
+
+      <div class="cs-block">
+        <video src="../assets/counterparty/vid1.mp4"
+               autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+
+      <div class="cs-block">
+        <video src="../assets/counterparty/vid2.mp4"
+               autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+
+      <a href="../" class="cs-back">← Back to work</a>
+    </section>
   </main>
 </body>
 </html>
