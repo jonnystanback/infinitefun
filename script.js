@@ -69,60 +69,26 @@
 })();
 
 // Infinite Fun — hero carousel
-// 3 rows of marquee, alternating direction, all carousel assets distributed
-// across them with no on-screen duplicates.
+// 3 rows of marquee, each row is a single pre-baked WebP strip duplicated
+// twice so translate -50% → 0 loops seamlessly.
 
-const CAROUSEL_FILES = [
-  "Frame 305.png","Frame 306.png","Frame 308.png","Frame 309.png","Frame 310.png",
-  "Frame 311.png","Frame 312.png","Frame 313.png","Frame 314.png","Frame 315.png",
-  "Frame 316.png","Frame 317.png","Frame 318.png","Frame 319.png","Frame 320.png",
-  "Frame 321.png","Frame 322.png","Frame 323.png","Frame 324.png","Frame 325.png",
-  "Frame 326.png","Frame 327.png","Frame 328.png","Frame 329.png","Frame 330.png",
-  "Frame 331.png","Frame 332.png","Frame 333.png","Frame 334.png","Frame 335.png",
-  "Frame 336.png","Frame 338.png","Group 37279.png",
-  "Screenshot 2026-02-11 at 4.44.02 PM 4.png","Vinylmockup1 1.png",
+const CAROUSEL_STRIPS = [
+  "Group 37290.webp",
+  "Group 37291.webp",
+  "Group 37292.webp",
 ];
 
-function shuffle(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = (Math.random() * (i + 1)) | 0;
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function splitIntoRows(items, rowCount) {
-  // Shuffle then deal into N rows so each row has a unique random slice.
-  // No file appears in more than one row, and no row has duplicates.
-  const shuffled = shuffle(items);
-  const rows = Array.from({ length: rowCount }, () => []);
-  shuffled.forEach((file, i) => rows[i % rowCount].push(file));
-  return rows.map((r) => shuffle(r));
-}
-
-// Resolved once per page load — mobile gets the smaller 220px-tall set,
-// desktop gets the 360px set.
-const CAROUSEL_FOLDER =
-  window.matchMedia("(max-width: 720px)").matches
-    ? "assets/carousel/sm-mobile"
-    : "assets/carousel/sm";
-
-function buildRow(track, files) {
-  // Duplicate the file list so the marquee can translate -50% → 0
-  // (or 0 → -50%) and loop seamlessly.
-  const sequence = files.concat(files);
-  const frag = document.createDocumentFragment();
-  for (const f of sequence) {
-    const baseNoExt = f.replace(/\.(png|jpe?g)$/i, "");
+function buildStripRow(track, file) {
+  const url = `assets/carousel/strips/${encodeURIComponent(file)}`;
+  for (let i = 0; i < 2; i++) {
     const img = document.createElement("img");
-    img.src = `${CAROUSEL_FOLDER}/${encodeURIComponent(baseNoExt)}.jpg`;
+    img.src = url;
     img.alt = "";
     img.decoding = "async";
     img.fetchPriority = "high";
-    frag.appendChild(img);
+    img.className = "carousel-strip";
+    track.appendChild(img);
   }
-  track.appendChild(frag);
 }
 
 function initCarousel() {
@@ -140,8 +106,10 @@ function initCarousel() {
 
   stack.classList.add("is-loading");
 
-  const groups = splitIntoRows(CAROUSEL_FILES, tracks.length);
-  tracks.forEach((track, i) => buildRow(track, groups[i]));
+  tracks.forEach((track, i) => {
+    const file = CAROUSEL_STRIPS[i % CAROUSEL_STRIPS.length];
+    buildStripRow(track, file);
+  });
 
   rows.forEach((row) => {
     const speed = parseFloat(row.dataset.speed) || 90;

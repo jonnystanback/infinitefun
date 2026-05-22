@@ -387,7 +387,9 @@ body.with-footer > main {
 
 /* ---------- carousel ---------- */
 .carousel-stack {
-  width: 100%;
+  width: calc(100% + 64px);
+  margin-left: -32px;
+  margin-right: -32px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -410,7 +412,7 @@ body.with-footer > main {
 
 .carousel-track {
   display: flex;
-  gap: 14px;
+  gap: 0;
   width: max-content;
   will-change: transform;
 }
@@ -418,11 +420,13 @@ body.with-footer > main {
 .carousel-track img {
   height: clamp(80px, 9vw, 120px);
   width: auto;
-  border-radius: 10px;
   object-fit: cover;
   display: block;
   pointer-events: none;
 }
+/* Each strip owns a trailing gap so two copies + margin = 2 × (W + gap),
+   and translating -50% advances by exactly one (strip + gap) unit. */
+.carousel-strip { margin-right: 15px; }
 
 @keyframes scroll-right {
   from { transform: translate3d(-50%, 0, 0); }
@@ -695,7 +699,10 @@ body.with-footer > main {
   gap: clamp(40px, 6vh, 96px);
   min-height: clamp(340px, 36vw, 440px);
   color: var(--ink);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(.2,.8,.3,1);
 }
+.pricing-card:hover { transform: scale(1.02); }
 
 .pricing-card--dark {
   background: var(--ink);
@@ -741,12 +748,7 @@ body.with-footer > main {
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: #9a9a9a;
-}
-
-.pricing-card--dark .pricing-timeline,
-.pricing-card--dark .pricing-price {
-  color: rgba(255, 255, 255, 0.55);
+  color: inherit;
 }
 
 .pricing-desc {
@@ -756,6 +758,33 @@ body.with-footer > main {
   font-size: 16px;
   line-height: 1.3;
   letter-spacing: -0.03em;
+  color: inherit;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: clamp(20px, 3vw, 56px);
+  row-gap: 8px;
+  justify-content: start;
+}
+.pricing-features li {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #9a9a9a;
+  text-transform: capitalize;
+}
+.pricing-card--dark .pricing-features li {
+  color: rgba(255, 255, 255, 0.55);
+}
+.pricing-features li::before {
+  content: "—  ";
   color: inherit;
 }
 
@@ -868,9 +897,10 @@ body.with-footer > main {
   .cta-arrow { width: 30px; height: 30px; }
 
   /* Carousel */
-  .carousel-stack { gap: 10px; margin-top: 4px; }
-  .carousel-track { gap: 10px; }
-  .carousel-track img { height: clamp(60px, 14vw, 85px); border-radius: 8px; }
+  .carousel-stack { gap: 10px; margin-top: 4px; margin-left: -22px; margin-right: -22px; width: calc(100% + 44px); }
+  .carousel-track { gap: 0; }
+  .carousel-track img { height: clamp(60px, 14vw, 85px); }
+  .carousel-strip { margin-right: 5px; }
 
   /* Black box thesis — generous side padding, narrower text column */
   #thesis { padding: 36px 0 0; }

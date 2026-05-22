@@ -39,7 +39,7 @@
     /* Intro: title row, thin divider, then services grid below */
     .cs-intro {
       width: 100%;
-      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px);
+      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(28px, 4vh, 48px);
       display: flex;
       flex-direction: column;
       gap: clamp(32px, 5vh, 56px);
@@ -94,6 +94,52 @@
       color: #fff;
     }
 
+    /* Diagnosis section */
+    .cs-diagnosis {
+      width: 100%;
+      padding: 0 clamp(16px, 2vw, 40px) clamp(72px, 10vh, 120px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(28px, 4vh, 48px);
+    }
+    .cs-diag-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .cs-diag-body {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: none;
+    }
+    .cs-diag-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.815fr;
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-diag-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 14px;
+      aspect-ratio: 1 / 1;
+    }
+    .cs-diag-images img:nth-child(3) {
+      aspect-ratio: 1497 / 825;
+    }
+
     /* Bento gallery */
     .cs-bento {
       display: flex;
@@ -135,15 +181,12 @@
     .cs-block--coin {
       aspect-ratio: 1 / 1;
       background: #082659;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .cs-block--face img,
     .cs-block--coin img {
-      width: auto;
-      height: 60%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* Color swatches row */
@@ -185,6 +228,8 @@
     .cs-back:hover { background: rgba(255, 255, 255, 0.08); }
 
     @media (max-width: 720px) {
+      .cs-hero { height: auto; max-height: none; }
+      .cs-hero video { height: auto; object-fit: contain; }
       .cs-intro { gap: 24px; padding: 48px 22px; }
       .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
       .cs-services {
@@ -193,13 +238,17 @@
         row-gap: 8px;
       }
       .cs-services li { font-size: 13px; }
+      .cs-intro { padding-bottom: 18px; }
+      .cs-diagnosis { padding: 0 14px 56px; gap: 22px; }
+      .cs-diag-title { font-size: clamp(24px, 6.5vw, 38px); }
+      .cs-diag-body { font-size: clamp(24px, 6.5vw, 38px); }
+      .cs-diag-images { gap: 8px; border-radius: 10px; }
+      .cs-diag-images img { border-radius: 8px; }
       .cs-bento { padding: 0 14px 80px; gap: 12px; }
       .cs-block { border-radius: 10px; }
       .cs-block--wordmark { aspect-ratio: 2.6 / 1; }
       .cs-block--face,
       .cs-block--coin { aspect-ratio: 1 / 1; }
-      .cs-block--face img,
-      .cs-block--coin img { height: 58%; }
       .cs-colors { gap: 10px; }
     }
   </style>
@@ -237,6 +286,18 @@
       </ul>
     </section>
 
+    <section class="cs-diagnosis">
+      <hr class="cs-intro-divider" />
+      <p class="cs-diag-body">The objective was to reposition the brand into a more premium, scalable, and institutionally credible direction while preserving core brand equity.</p>
+      <div class="cs-diag-images">
+        <img src="../assets/counterparty/prev1.png" alt="" />
+        <img src="../assets/counterparty/prev2.png" alt="" />
+        <img src="../assets/counterparty/prev3.png" alt="" />
+      </div>
+      <p class="cs-diag-body">We kept the motif of the two opposed heads, but then built an entire new world around an elevated version. We swapped the yellow for an authoritative navy, and used iconic imagery from finance, heritage institutions, and New York City to craft a professional and iconic brand.</p>
+      <hr class="cs-intro-divider" />
+    </section>
+
     <section class="cs-bento">
       <div class="cs-block cs-block--wordmark">
         <img src="../assets/counterparty/wordmark.png" alt="Counterparty wordmark" />
@@ -244,10 +305,12 @@
 
       <div class="cs-block-row">
         <div class="cs-block cs-block--face">
-          <img src="../assets/counterparty/face.png" alt="Counterparty Janus mark" />
+          <video src="../assets/counterparty/logoupdate.mp4"
+                 autoplay muted loop playsinline preload="metadata"></video>
         </div>
         <div class="cs-block cs-block--coin">
-          <img src="../assets/counterparty/Frame%20341.png" alt="Counterparty coin" />
+          <video src="../assets/casestudies/cointurn.mp4"
+                 autoplay muted loop playsinline preload="metadata"></video>
         </div>
       </div>
 
