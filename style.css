@@ -628,7 +628,7 @@ body.with-footer > main {
 
 .cs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(12px, 1.5vw, 20px);
 }
 
