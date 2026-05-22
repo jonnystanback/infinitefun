@@ -77,6 +77,12 @@ const STRIP_FOLDER = IS_MOBILE
   ? "assets/carousel/strips-mobile"
   : "assets/carousel/strips";
 const STRIP_EXT = IS_MOBILE ? "jpg" : "webp";
+// Intrinsic strip dimensions — set as width/height attrs so the browser
+// reserves layout space before the image bytes arrive. Without this,
+// `width: max-content` on the track resolves to 0 until load, which
+// breaks the -50% keyframes used by scroll-right rows (rows 1 & 3).
+const STRIP_W = IS_MOBILE ? 3523 : 8312;
+const STRIP_H = IS_MOBILE ? 170 : 401;
 
 const CAROUSEL_STRIPS = [
   "Group 37290",
@@ -93,6 +99,8 @@ function buildStripRow(track, baseName) {
     img.alt = "";
     img.decoding = "async";
     img.fetchPriority = "high";
+    img.width = STRIP_W;
+    img.height = STRIP_H;
     img.className = "carousel-strip";
     track.appendChild(img);
   }
