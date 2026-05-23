@@ -36,7 +36,7 @@
 
     .cs-intro {
       width: 100%;
-      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(72px, 10vh, 120px);
+      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(28px, 4vh, 48px);
       display: flex;
       flex-direction: column;
       gap: clamp(32px, 5vh, 56px);
@@ -90,12 +90,63 @@
       color: #fff;
     }
 
+    /* Bento gallery */
+    .cs-bento {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 80px);
+      padding: 0 clamp(16px, 2vw, 40px) clamp(80px, 12vh, 160px);
+    }
+    .cs-block {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .cs-block img,
+    .cs-block video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-block-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-block--logo       { aspect-ratio: 1806 / 644; }
+    .cs-block--hand       { aspect-ratio: 1904 / 1180; }
+    .cs-block--brand      { aspect-ratio: 1889 / 2004; }
+    .cs-block-row--cover  > .cs-block { aspect-ratio: 1899 / 1011; }
+    .cs-block-row--web    > .cs-block { aspect-ratio: 950 / 450; }
+    .cs-block-row--product > .cs-block { aspect-ratio: 1036 / 618; }
+
+    /* Color swatches row */
+    .cs-colors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-color {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .cs-color img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .cs-back {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 14px 22px;
-      margin: 0 auto clamp(80px, 12vh, 160px);
+      margin: clamp(40px, 6vh, 80px) auto 0;
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 999px;
       font-family: var(--sans);
@@ -111,7 +162,7 @@
     @media (max-width: 720px) {
       .cs-hero { height: auto; max-height: none; }
       .cs-hero video { height: auto; object-fit: contain; }
-      .cs-intro { gap: 24px; padding: 48px 22px; }
+      .cs-intro { gap: 24px; padding: 48px 22px 18px; }
       .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
       .cs-services {
         grid-template-columns: repeat(3, 1fr);
@@ -119,6 +170,9 @@
         row-gap: 8px;
       }
       .cs-services li { font-size: 13px; }
+      .cs-bento { padding: 0 14px 80px; gap: 36px; }
+      .cs-block { border-radius: 10px; }
+      .cs-colors { gap: 10px; }
     }
   </style>
 </head>
@@ -153,7 +207,62 @@
       </ul>
     </section>
 
-    <a href="../" class="cs-back">← Back to work</a>
+    <section class="cs-bento">
+      <div class="cs-block cs-block--logo">
+        <img src="../assets/STRIPS/logo.png" alt="STRIPS logo" />
+      </div>
+
+      <div class="cs-block-row cs-block-row--cover">
+        <div class="cs-block"><img src="../assets/STRIPS/cover.png" alt="STRIPS cover" /></div>
+        <div class="cs-block"><img src="../assets/STRIPS/package1.png" alt="STRIPS packaging" /></div>
+      </div>
+
+      <div class="cs-colors">
+        <div class="cs-color"><img src="../assets/STRIPS/color1.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/STRIPS/color2.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/STRIPS/color3.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/STRIPS/color4.png" alt="" /></div>
+      </div>
+
+      <div class="cs-block cs-block--hand">
+        <img src="../assets/STRIPS/hand.png" alt="STRIPS in hand" />
+      </div>
+
+      <div class="cs-block-row cs-block-row--web">
+        <div class="cs-block"><img src="../assets/STRIPS/web1.png" alt="STRIPS web 1" /></div>
+        <div class="cs-block"><img src="../assets/STRIPS/web2.png" alt="STRIPS web 2" /></div>
+      </div>
+
+      <div class="cs-block-row cs-block-row--product">
+        <div class="cs-block"><img src="../assets/STRIPS/product%201.png" alt="STRIPS product 1" /></div>
+        <div class="cs-block"><img src="../assets/STRIPS/product2.png" alt="STRIPS product 2" /></div>
+      </div>
+
+      <div class="cs-block cs-block--brand">
+        <img src="../assets/STRIPS/brand.png" alt="STRIPS brand" />
+      </div>
+
+      <a href="../" class="cs-back">← Back to work</a>
+    </section>
   </main>
+  <script>
+    (function setupCaseStudyReveals() {
+      if (!("IntersectionObserver" in window)) return;
+      const targets = document.querySelectorAll(".cs-intro > *, .cs-bento > *");
+      targets.forEach((el) => el.classList.add("fade-in"));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>
