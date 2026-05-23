@@ -39,7 +39,7 @@
     /* Intro: title row, thin divider, then services grid below */
     .cs-intro {
       width: 100%;
-      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(28px, 4vh, 48px);
+      padding: clamp(72px, 10vh, 120px) clamp(32px, 4vw, 80px) clamp(28px, 4vh, 48px);
       display: flex;
       flex-direction: column;
       gap: clamp(32px, 5vh, 56px);
@@ -68,8 +68,8 @@
       height: 1px;
       background: #fff;
       border: 0;
-      margin: 0 calc(-1 * clamp(16px, 2vw, 40px));
-      width: calc(100% + 2 * clamp(16px, 2vw, 40px));
+      margin: 0 calc(-1 * clamp(32px, 4vw, 80px));
+      width: calc(100% + 2 * clamp(32px, 4vw, 80px));
     }
     .cs-services {
       list-style: none;
@@ -97,7 +97,7 @@
     /* Diagnosis section */
     .cs-diagnosis {
       width: 100%;
-      padding: 0 clamp(16px, 2vw, 40px) clamp(72px, 10vh, 120px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(72px, 10vh, 120px);
       display: flex;
       flex-direction: column;
       gap: clamp(28px, 4vh, 48px);
@@ -145,7 +145,7 @@
       display: flex;
       flex-direction: column;
       gap: clamp(12px, 1.4vw, 22px);
-      padding: 0 clamp(16px, 2vw, 40px) clamp(80px, 12vh, 160px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(80px, 12vh, 160px);
     }
     .cs-block {
       width: 100%;
@@ -338,5 +338,24 @@
       <a href="../" class="cs-back">← Back to work</a>
     </section>
   </main>
+  <script>
+    (function setupCaseStudyReveals() {
+      if (!("IntersectionObserver" in window)) return;
+      const targets = document.querySelectorAll(".cs-intro > *, .cs-diagnosis > *, .cs-bento > *");
+      targets.forEach((el) => el.classList.add("fade-in"));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>

@@ -36,7 +36,7 @@
 
     .cs-intro {
       width: 100%;
-      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(28px, 4vh, 48px);
+      padding: clamp(72px, 10vh, 120px) clamp(32px, 4vw, 80px) clamp(28px, 4vh, 48px);
       display: flex;
       flex-direction: column;
       gap: clamp(32px, 5vh, 56px);
@@ -64,8 +64,8 @@
       height: 1px;
       background: #fff;
       border: 0;
-      margin: 0 calc(-1 * clamp(16px, 2vw, 40px));
-      width: calc(100% + 2 * clamp(16px, 2vw, 40px));
+      margin: 0 calc(-1 * clamp(32px, 4vw, 80px));
+      width: calc(100% + 2 * clamp(32px, 4vw, 80px));
     }
     .cs-services {
       list-style: none;
@@ -90,12 +90,26 @@
       color: #fff;
     }
 
+    /* Serif body paragraph slotted between bento rows */
+    .cs-body-serif {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: none;
+      padding: clamp(24px, 3vw, 56px) 0;
+    }
+
     /* Bento gallery */
     .cs-bento {
       display: flex;
       flex-direction: column;
       gap: clamp(40px, 5vw, 80px);
-      padding: 0 clamp(16px, 2vw, 40px) clamp(80px, 12vh, 160px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(80px, 12vh, 160px);
     }
     .cs-block {
       width: 100%;
@@ -128,6 +142,12 @@
       grid-template-columns: repeat(4, 1fr);
       gap: clamp(12px, 1.4vw, 22px);
     }
+    .cs-color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
+    }
     .cs-color {
       aspect-ratio: 1 / 1;
       border-radius: 999px;
@@ -139,6 +159,17 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .cs-color-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .cs-back {
@@ -171,6 +202,7 @@
       }
       .cs-services li { font-size: 13px; }
       .cs-bento { padding: 0 14px 80px; gap: 36px; }
+      .cs-body-serif { font-size: clamp(24px, 6.5vw, 38px); padding: 12px 0; }
       .cs-block { border-radius: 10px; }
       .cs-colors { gap: 10px; }
     }
@@ -205,6 +237,7 @@
         <li>Product Mockups</li>
         <li>Brand Strategy</li>
       </ul>
+      <hr class="cs-intro-divider" />
     </section>
 
     <section class="cs-bento">
@@ -212,21 +245,37 @@
         <img src="../assets/STRIPS/logo.png" alt="STRIPS logo" />
       </div>
 
+      <p class="cs-body-serif">A big, bold all caps STRIPS for the branding made it stand out. The packaging was a lot of fun to create. We wanted it to resemble colorful dryer sheets stacked on top of each other.</p>
+
       <div class="cs-block-row cs-block-row--cover">
         <div class="cs-block"><img src="../assets/STRIPS/cover.png" alt="STRIPS cover" /></div>
         <div class="cs-block"><img src="../assets/STRIPS/package1.png" alt="STRIPS packaging" /></div>
       </div>
 
       <div class="cs-colors">
-        <div class="cs-color"><img src="../assets/STRIPS/color1.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/STRIPS/color2.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/STRIPS/color3.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/STRIPS/color4.png" alt="" /></div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/STRIPS/color1.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #FF0018">HEX: FF0018<br />BOLD RED</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/STRIPS/color2.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #FFD000">HEX: FFD000<br />SUMMER GOLD</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/STRIPS/color3.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #AAB4FF">HEX: AAB4FF<br />LINEN PERIWINKLE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/STRIPS/color4.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #EAEEFD">HEX: EAEEFD<br />LIGHT LAVENDER</p>
+        </div>
       </div>
 
       <div class="cs-block cs-block--hand">
         <img src="../assets/STRIPS/hand.png" alt="STRIPS in hand" />
       </div>
+
+      <p class="cs-body-serif">We worked with a team of developers to design their website &mdash; choosing a light lavender paired with a bold red as the main design elements of the page.</p>
 
       <div class="cs-block-row cs-block-row--web">
         <div class="cs-block"><img src="../assets/STRIPS/web1.png" alt="STRIPS web 1" /></div>
@@ -235,7 +284,10 @@
 
       <div class="cs-block-row cs-block-row--product">
         <div class="cs-block"><img src="../assets/STRIPS/product%201.png" alt="STRIPS product 1" /></div>
-        <div class="cs-block"><img src="../assets/STRIPS/product2.png" alt="STRIPS product 2" /></div>
+        <div class="cs-block">
+          <video src="../assets/STRIPS/hero.mov"
+                 autoplay muted loop playsinline preload="metadata"></video>
+        </div>
       </div>
 
       <div class="cs-block cs-block--brand">

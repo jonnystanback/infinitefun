@@ -36,7 +36,7 @@
 
     .cs-intro {
       width: 100%;
-      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(72px, 10vh, 120px);
+      padding: clamp(72px, 10vh, 120px) clamp(32px, 4vw, 80px) clamp(28px, 4vh, 48px);
       display: flex;
       flex-direction: column;
       gap: clamp(32px, 5vh, 56px);
@@ -64,8 +64,8 @@
       height: 1px;
       background: #fff;
       border: 0;
-      margin: 0 calc(-1 * clamp(16px, 2vw, 40px));
-      width: calc(100% + 2 * clamp(16px, 2vw, 40px));
+      margin: 0 calc(-1 * clamp(32px, 4vw, 80px));
+      width: calc(100% + 2 * clamp(32px, 4vw, 80px));
     }
     .cs-services {
       list-style: none;
@@ -90,12 +90,124 @@
       color: #fff;
     }
 
+    /* Serif body paragraph slotted between bento rows */
+    .cs-body-serif {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: none;
+      padding: clamp(24px, 3vw, 56px) 0;
+    }
+
+    /* Bento gallery */
+    .cs-bento {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 80px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(80px, 12vh, 160px);
+    }
+    .cs-block {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .cs-block img,
+    .cs-block video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-block-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-block-row--paddle > .cs-block {
+      aspect-ratio: 1 / 1;
+      background: transparent;
+    }
+    .cs-block-row--paddle > .cs-block img {
+      object-fit: contain;
+    }
+
+    /* Product pair: widths proportional to native asset widths so common
+       height matches across both images, both sized up to fill the bento
+       width edge-to-edge with a tight gap. */
+    .cs-block-row--product {
+      grid-template-columns: 2230fr 1100fr;
+      gap: clamp(8px, 1vw, 16px);
+      align-items: end;
+    }
+    .cs-block-row--product > .cs-block {
+      aspect-ratio: auto;
+      background: transparent;
+    }
+    .cs-block-row--product > .cs-block img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Color swatches row */
+    .cs-colors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-color {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .cs-color img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cs-block-row--hex {
+      display: flex;
+      grid-template-columns: none;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+    .cs-block-row--hex > .cs-block {
+      width: clamp(140px, 16vw, 240px);
+      aspect-ratio: 1 / 1;
+      background: transparent;
+      border-radius: 0;
+    }
+    .cs-block-row--hex > .cs-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .cs-block--oldbrand {
+      aspect-ratio: 3176 / 1009;
+      max-width: 50%;
+      margin: 0 auto;
+    }
+    .cs-block--wordmark { aspect-ratio: 1770 / 352; background: transparent; }
+
     .cs-back {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 14px 22px;
-      margin: 0 auto clamp(80px, 12vh, 160px);
+      margin: clamp(40px, 6vh, 80px) auto 0;
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 999px;
       font-family: var(--sans);
@@ -111,7 +223,7 @@
     @media (max-width: 720px) {
       .cs-hero { height: auto; max-height: none; }
       .cs-hero video { height: auto; object-fit: contain; }
-      .cs-intro { gap: 24px; padding: 48px 22px; }
+      .cs-intro { gap: 24px; padding: 48px 22px 18px; }
       .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
       .cs-services {
         grid-template-columns: repeat(3, 1fr);
@@ -119,6 +231,10 @@
         row-gap: 8px;
       }
       .cs-services li { font-size: 13px; }
+      .cs-bento { padding: 0 14px 80px; gap: 36px; }
+      .cs-block { border-radius: 10px; }
+      .cs-body-serif { font-size: clamp(24px, 6.5vw, 38px); padding: 12px 0; }
+      .cs-colors { gap: 10px; }
     }
   </style>
 </head>
@@ -140,7 +256,7 @@
     </section>
 
     <section class="cs-intro">
-      <h1>We helped <span class="serif">Enhance Pickleball</span> build a new brand from the ground up to position themselves for the next phase of their growth. We helped design their Sweetspot Pro Paddle, their Dinkmaster Pro practice board, as well as some other pickleball accessories.</h1>
+      <h1>We built an entirely new brand direction for <span class="serif">Enhance Pickleball</span> to position them as a strong player in their field, and helped design their paddle.</h1>
       <hr class="cs-intro-divider" />
       <ul class="cs-services">
         <li>Brand Identity</li>
@@ -152,9 +268,70 @@
         <li>Logos</li>
         <li>Wordmarks</li>
       </ul>
+      <hr class="cs-intro-divider" />
     </section>
 
-    <a href="../" class="cs-back">← Back to work</a>
+    <section class="cs-bento">
+      <p class="cs-body-serif">This was their original brand. Built around an EP logo, and bright blue and green for the brand colors. They wanted something stronger and authoritative, that would position them as a higher-tier brand.</p>
+
+      <div class="cs-block cs-block--oldbrand">
+        <img src="../assets/enhance%20pickleball/oldbrand.png" alt="Original Enhance Pickleball brand" />
+      </div>
+
+      <hr class="cs-intro-divider" />
+
+      <div class="cs-block cs-block--wordmark">
+        <img src="../assets/enhance%20pickleball/wordmark.png" alt="Enhance Pickleball wordmark" />
+      </div>
+
+      <div class="cs-block-row cs-block-row--hex">
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/hex1.png" alt="" /></div>
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/hex2.png" alt="" /></div>
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/hex3.png" alt="" /></div>
+      </div>
+
+      <p class="cs-body-serif">Build a bold, iconic brand, with motifs that can be used throughout the product catalog. We developed the hexagon motif to be used for their logo, their paddle, and their &lsquo;targets&rsquo; for their practice board.</p>
+
+      <div class="cs-block-row cs-block-row--paddle">
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/paddle1.png" alt="Enhance Pickleball paddle" /></div>
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/paddle2.png" alt="Enhance Pickleball paddle detail" /></div>
+      </div>
+
+      <div class="cs-colors">
+        <div class="cs-color"><img src="../assets/enhance%20pickleball/color1.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/enhance%20pickleball/color2.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/enhance%20pickleball/color3.png" alt="" /></div>
+        <div class="cs-color"><img src="../assets/enhance%20pickleball/color4.png" alt="" /></div>
+      </div>
+
+      <p class="cs-body-serif">We wanted to keep some of elements from their original product line, so we swapped the blue for a darker, bolder navy with a royal blue gradient, and introduced red as the central color for the brand.</p>
+
+      <div class="cs-block-row cs-block-row--product">
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/product1.png" alt="Enhance Pickleball product" /></div>
+        <div class="cs-block"><img src="../assets/enhance%20pickleball/product2.png" alt="Enhance Pickleball product detail" /></div>
+      </div>
+
+      <a href="../" class="cs-back">← Back to work</a>
+    </section>
   </main>
+  <script>
+    (function setupCaseStudyReveals() {
+      if (!("IntersectionObserver" in window)) return;
+      const targets = document.querySelectorAll(".cs-intro > *, .cs-bento > *");
+      targets.forEach((el) => el.classList.add("fade-in"));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>

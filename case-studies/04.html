@@ -3,45 +3,237 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Infinite Fun</title>
+  <title>CUBBI — Infinite Fun</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .cs-page {
-      min-height: 100vh;
-      padding: 80px 32px;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ---------- Case study page ---------- */
+    body { background: #000; color: #fff; }
+
+    body .site-nav { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); }
+    body .site-nav .logo img { filter: invert(1); }
+    body .nav-link { color: #fff; }
+    body .nav-link:hover { opacity: 0.6; }
+
+    .case-page { width: 100%; }
+
+    .cs-hero {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+      overflow: hidden;
+      position: relative;
     }
-    .cs-back {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      display: inline-block;
-      margin-bottom: 40px;
+    .cs-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .cs-back:hover { opacity: 0.6; }
-    .cs-page h1 {
-      margin: 0 0 16px;
+
+    .cs-intro {
+      width: 100%;
+      padding: clamp(72px, 10vh, 120px) clamp(32px, 4vw, 80px) clamp(28px, 4vh, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 5vh, 56px);
+    }
+    .cs-intro h1 {
+      margin: 0;
       font-family: var(--sans);
-      font-weight: 500;
-      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      font-size: clamp(32px, 4.6vw, 76px);
+      line-height: 1.06;
       letter-spacing: -0.03em;
-      line-height: 1;
+      color: #fff;
+      max-width: none;
+      text-align: left;
     }
-    .cs-page .placeholder {
+    .cs-intro h1 .serif {
+      font-family: var(--serif);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.16em;
+      letter-spacing: -0.01em;
+      padding: 0 0.02em;
+    }
+    .cs-intro-divider {
+      height: 1px;
+      background: #fff;
+      border: 0;
+      margin: 0 calc(-1 * clamp(32px, 4vw, 80px));
+      width: calc(100% + 2 * clamp(32px, 4vw, 80px));
+    }
+    .cs-services {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      column-gap: clamp(20px, 3vw, 56px);
+      row-gap: 12px;
+      justify-content: start;
+      text-align: left;
+    }
+    .cs-services li {
       font-family: var(--sans);
-      font-size: 18px;
-      color: var(--muted);
+      font-weight: 400;
+      font-size: 15px;
       letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .cs-services li::before {
+      content: "—  ";
+      color: #fff;
+    }
+
+    /* Serif body paragraph slotted between bento rows */
+    .cs-body-serif {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: none;
+      padding: clamp(24px, 3vw, 56px) 0;
+    }
+
+    /* Bento gallery */
+    .cs-bento {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 80px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(80px, 12vh, 160px);
+    }
+    .cs-block {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .cs-block img,
+    .cs-block video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-block-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-block--logo     { aspect-ratio: 1747 / 338; background: transparent; }
+    .cs-block--logogrid { aspect-ratio: 1894 / 917; }
+    .cs-block--website  { aspect-ratio: 1882 / 1149; }
+
+    /* Product pair: cells sized to native widths so a shared height
+       packs both edge-to-edge without cropping. */
+    .cs-block-row--products {
+      grid-template-columns: 1013fr 842fr;
+    }
+    .cs-block-row--products > .cs-block {
+      aspect-ratio: auto;
+      background: transparent;
+    }
+    .cs-block-row--products > .cs-block img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .cs-block-row--productview {
+      grid-template-columns: 1034fr 1276fr;
+      align-items: end;
+    }
+    .cs-block-row--productview > .cs-block {
+      aspect-ratio: auto;
+      background: transparent;
+    }
+    .cs-block-row--productview > .cs-block img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Color swatches row — 6 circles with labels */
+    .cs-colors {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
+    }
+    .cs-color {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .cs-color img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-color-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      margin: clamp(40px, 6vh, 80px) auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      width: fit-content;
+      transition: background-color 0.2s ease;
+    }
+    .cs-back:hover { background: rgba(255, 255, 255, 0.08); }
+
+    @media (max-width: 720px) {
+      .cs-hero { height: auto; max-height: none; }
+      .cs-hero video { height: auto; object-fit: contain; }
+      .cs-intro { gap: 24px; padding: 48px 22px 18px; }
+      .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
+      .cs-services {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 18px;
+        row-gap: 8px;
+      }
+      .cs-services li { font-size: 13px; }
+      .cs-bento { padding: 0 14px 80px; gap: 36px; }
+      .cs-block { border-radius: 10px; }
+      .cs-body-serif { font-size: clamp(24px, 6.5vw, 38px); padding: 12px 0; }
+      .cs-colors { gap: 10px; }
     }
   </style>
 </head>
-<body>
+<body class="case-study">
   <header class="site-nav">
     <a class="logo" href="../" aria-label="Infinite Fun home">
       <img src="../assets/iflogo.png" alt="Infinite Fun" />
@@ -52,10 +244,100 @@
     <a class="nav-link" href="../#inquire">Inquire</a>
   </header>
 
-  <main class="cs-page">
-    <a href="../" class="cs-back">← Back to work</a>
-    <h1>Case Study 04</h1>
-    <p class="placeholder">Case study content coming soon.</p>
+  <main class="case-page">
+    <section class="cs-hero">
+      <video src="../assets/cubbi/cubbihero.mp4"
+             autoplay muted loop playsinline preload="auto"></video>
+    </section>
+
+    <section class="cs-intro">
+      <h1><span class="serif">CUBBI</span> needed a fun rebrand to match their new direction and target audience for growth.</h1>
+      <hr class="cs-intro-divider" />
+      <ul class="cs-services">
+        <li>Brand Identity</li>
+        <li>Digital Design</li>
+        <li>Website Design</li>
+        <li>Brand Strategy</li>
+        <li>Logo</li>
+        <li>Wordmark</li>
+        <li>Brand Blueprint</li>
+      </ul>
+      <hr class="cs-intro-divider" />
+    </section>
+
+    <section class="cs-bento">
+      <div class="cs-block cs-block--logo">
+        <img src="../assets/cubbi/logo.png" alt="CUBBI logo" />
+      </div>
+
+      <div class="cs-colors">
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color1.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #A6DA40">HEX: A6DA40<br />KIWI GREEN</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color2.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #F5FF2F">HEX: F5FF2F<br />BRIGHT YELLOW</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color3.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #FFBADB">HEX: FFBADB<br />BLUSH PINK</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color4.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #FF3E34">HEX: FF3E34<br />CANDY RED</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color5.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #34BFF6">HEX: 34BFF6<br />TROPICAL BLUE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/cubbi/color6.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #F66D23">HEX: F66D23<br />BOLD ORANGE</p>
+        </div>
+      </div>
+
+      <p class="cs-body-serif">Bold colorful colors became central to the brand. How do we make this fun, artistic, creative, and playful?</p>
+
+      <div class="cs-block cs-block--logogrid">
+        <img src="../assets/cubbi/logogrid.png" alt="CUBBI logo grid" />
+      </div>
+
+      <div class="cs-block cs-block--website">
+        <img src="../assets/cubbi/website.png" alt="CUBBI website" />
+      </div>
+
+      <div class="cs-block-row cs-block-row--products">
+        <div class="cs-block"><img src="../assets/cubbi/product1.png" alt="CUBBI product 1" /></div>
+        <div class="cs-block"><img src="../assets/cubbi/product2.png" alt="CUBBI product 2" /></div>
+      </div>
+
+      <div class="cs-block-row cs-block-row--productview">
+        <div class="cs-block"><img src="../assets/cubbi/productview.png" alt="CUBBI product view 1" /></div>
+        <div class="cs-block"><img src="../assets/cubbi/productview2.png" alt="CUBBI product view 2" /></div>
+      </div>
+
+      <a href="../" class="cs-back">← Back to work</a>
+    </section>
   </main>
+  <script>
+    (function setupCaseStudyReveals() {
+      if (!("IntersectionObserver" in window)) return;
+      const targets = document.querySelectorAll(".cs-intro > *, .cs-bento > *");
+      targets.forEach((el) => el.classList.add("fade-in"));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>
