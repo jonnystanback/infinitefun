@@ -3,45 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Infinite Fun</title>
+  <title>Enhance Pickleball — Infinite Fun</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .cs-page {
-      min-height: 100vh;
-      padding: 80px 32px;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ---------- Case study page ---------- */
+    body { background: #000; color: #fff; }
+
+    body .site-nav { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); }
+    body .site-nav .logo img { filter: invert(1); }
+    body .nav-link { color: #fff; }
+    body .nav-link:hover { opacity: 0.6; }
+
+    .case-page { width: 100%; }
+
+    .cs-hero {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+      overflow: hidden;
+      position: relative;
     }
-    .cs-back {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      display: inline-block;
-      margin-bottom: 40px;
+    .cs-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .cs-back:hover { opacity: 0.6; }
-    .cs-page h1 {
-      margin: 0 0 16px;
+
+    .cs-intro {
+      width: 100%;
+      padding: clamp(72px, 10vh, 120px) clamp(16px, 2vw, 40px) clamp(72px, 10vh, 120px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 5vh, 56px);
+    }
+    .cs-intro h1 {
+      margin: 0;
       font-family: var(--sans);
-      font-weight: 500;
-      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      font-size: clamp(32px, 4.6vw, 76px);
+      line-height: 1.06;
       letter-spacing: -0.03em;
-      line-height: 1;
+      color: #fff;
+      max-width: none;
+      text-align: left;
     }
-    .cs-page .placeholder {
+    .cs-intro h1 .serif {
+      font-family: var(--serif);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.16em;
+      letter-spacing: -0.01em;
+      padding: 0 0.02em;
+    }
+    .cs-intro-divider {
+      height: 1px;
+      background: #fff;
+      border: 0;
+      margin: 0 calc(-1 * clamp(16px, 2vw, 40px));
+      width: calc(100% + 2 * clamp(16px, 2vw, 40px));
+    }
+    .cs-services {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      column-gap: clamp(20px, 3vw, 56px);
+      row-gap: 12px;
+      justify-content: start;
+      text-align: left;
+    }
+    .cs-services li {
       font-family: var(--sans);
-      font-size: 18px;
-      color: var(--muted);
+      font-weight: 400;
+      font-size: 15px;
       letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .cs-services li::before {
+      content: "—  ";
+      color: #fff;
+    }
+
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      margin: 0 auto clamp(80px, 12vh, 160px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      width: fit-content;
+      transition: background-color 0.2s ease;
+    }
+    .cs-back:hover { background: rgba(255, 255, 255, 0.08); }
+
+    @media (max-width: 720px) {
+      .cs-hero { height: auto; max-height: none; }
+      .cs-hero video { height: auto; object-fit: contain; }
+      .cs-intro { gap: 24px; padding: 48px 22px; }
+      .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
+      .cs-services {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 18px;
+        row-gap: 8px;
+      }
+      .cs-services li { font-size: 13px; }
     }
   </style>
 </head>
-<body>
+<body class="case-study">
   <header class="site-nav">
     <a class="logo" href="../" aria-label="Infinite Fun home">
       <img src="../assets/iflogo.png" alt="Infinite Fun" />
@@ -52,10 +133,28 @@
     <a class="nav-link" href="../#inquire">Inquire</a>
   </header>
 
-  <main class="cs-page">
+  <main class="case-page">
+    <section class="cs-hero">
+      <video src="../assets/enhance%20pickleball/hero.mov"
+             autoplay muted loop playsinline preload="auto"></video>
+    </section>
+
+    <section class="cs-intro">
+      <h1>We helped <span class="serif">Enhance Pickleball</span> build a new brand from the ground up to position themselves for the next phase of their growth. We helped design their Sweetspot Pro Paddle, their Dinkmaster Pro practice board, as well as some other pickleball accessories.</h1>
+      <hr class="cs-intro-divider" />
+      <ul class="cs-services">
+        <li>Brand Identity</li>
+        <li>Digital Design</li>
+        <li>Packaging Design</li>
+        <li>Product Design</li>
+        <li>Product Mockups</li>
+        <li>Social Templates</li>
+        <li>Logos</li>
+        <li>Wordmarks</li>
+      </ul>
+    </section>
+
     <a href="../" class="cs-back">← Back to work</a>
-    <h1>Case Study 02</h1>
-    <p class="placeholder">Case study content coming soon.</p>
   </main>
 </body>
 </html>
