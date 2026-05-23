@@ -155,11 +155,17 @@
       object-fit: contain;
     }
 
-    /* Color swatches row */
+    /* Color swatches row with hex/name labels */
     .cs-colors {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
     }
     .cs-color {
       aspect-ratio: 1 / 1;
@@ -172,6 +178,17 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .cs-color-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .cs-block-row--hex {
@@ -298,10 +315,22 @@
       </div>
 
       <div class="cs-colors">
-        <div class="cs-color"><img src="../assets/enhance%20pickleball/color1.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/enhance%20pickleball/color2.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/enhance%20pickleball/color3.png" alt="" /></div>
-        <div class="cs-color"><img src="../assets/enhance%20pickleball/color4.png" alt="" /></div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/enhance%20pickleball/color1.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #F20219">HEX: F20219<br />BOLD RED</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/enhance%20pickleball/color2.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #222222">HEX: 222222<br />SLATE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/enhance%20pickleball/color3.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #F5F5F5">HEX: F5F5F5<br />SPORT WHITE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/enhance%20pickleball/color4.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #060E32">HEX: 060E32<br />DARK NAVY</p>
+        </div>
       </div>
 
       <p class="cs-body-serif">We wanted to keep some of elements from their original product line, so we swapped the blue for a darker, bolder navy with a royal blue gradient, and introduced red as the central color for the brand.</p>
