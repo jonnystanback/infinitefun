@@ -3,45 +3,209 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Infinite Fun</title>
+  <title>FOUNDATION — Infinite Fun</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .cs-page {
-      min-height: 100vh;
-      padding: 80px 32px;
-      max-width: 900px;
-      margin: 0 auto;
+    /* ---------- Case study page ---------- */
+    body { background: #000; color: #fff; }
+
+    body .site-nav { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); }
+    body .site-nav .logo img { filter: invert(1); }
+    body .nav-link { color: #fff; }
+    body .nav-link:hover { opacity: 0.6; }
+
+    .case-page { width: 100%; }
+
+    .cs-hero {
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+      overflow: hidden;
+      position: relative;
     }
-    .cs-back {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.04em;
-      color: var(--ink);
-      display: inline-block;
-      margin-bottom: 40px;
+    .cs-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .cs-back:hover { opacity: 0.6; }
-    .cs-page h1 {
-      margin: 0 0 16px;
+
+    .cs-intro {
+      width: 100%;
+      padding: clamp(72px, 10vh, 120px) clamp(32px, 4vw, 80px) clamp(28px, 4vh, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 5vh, 56px);
+    }
+    .cs-intro h1 {
+      margin: 0;
       font-family: var(--sans);
-      font-weight: 500;
-      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      font-size: clamp(32px, 4.6vw, 76px);
+      line-height: 1.06;
       letter-spacing: -0.03em;
-      line-height: 1;
+      color: #fff;
+      max-width: none;
+      text-align: left;
     }
-    .cs-page .placeholder {
+    .cs-intro h1 .serif {
+      font-family: var(--serif);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.16em;
+      letter-spacing: -0.01em;
+      padding: 0 0.02em;
+    }
+    .cs-intro-divider {
+      height: 1px;
+      background: #fff;
+      border: 0;
+      margin: 0 calc(-1 * clamp(32px, 4vw, 80px));
+      width: calc(100% + 2 * clamp(32px, 4vw, 80px));
+    }
+    .cs-services {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      column-gap: clamp(20px, 3vw, 56px);
+      row-gap: 12px;
+      justify-content: start;
+      text-align: left;
+    }
+    .cs-services li {
       font-family: var(--sans);
-      font-size: 18px;
-      color: var(--muted);
+      font-weight: 400;
+      font-size: 15px;
       letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .cs-services li::before {
+      content: "—  ";
+      color: #fff;
+    }
+
+    /* Serif body paragraph slotted between bento rows */
+    .cs-body-serif {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 3.6vw, 60px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: none;
+      padding: clamp(24px, 3vw, 56px) 0;
+    }
+
+    /* Bento gallery */
+    .cs-bento {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 80px);
+      padding: 0 clamp(32px, 4vw, 80px) clamp(80px, 12vh, 160px);
+    }
+    .cs-block {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .cs-block img,
+    .cs-block video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-block--logo   { aspect-ratio: 1898 / 245; background: transparent; }
+    .cs-block--app    { aspect-ratio: 1673 / 1137; }
+    .cs-block--shapes { aspect-ratio: 1582 / 374; background: transparent; }
+    .cs-block--ads    { aspect-ratio: 1848 / 736; }
+    .cs-block--web    { aspect-ratio: 1815 / 1179; }
+
+    /* Color swatches row — 4 circles with labels */
+    .cs-colors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(12px, 1.4vw, 22px);
+    }
+    .cs-color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
+    }
+    .cs-color {
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .cs-color img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cs-color-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      margin: clamp(40px, 6vh, 80px) auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      width: fit-content;
+      transition: background-color 0.2s ease;
+    }
+    .cs-back:hover { background: rgba(255, 255, 255, 0.08); }
+
+    @media (max-width: 720px) {
+      .cs-hero { height: auto; max-height: none; }
+      .cs-hero video { height: auto; object-fit: contain; }
+      .cs-intro { gap: 24px; padding: 48px 22px 18px; }
+      .cs-intro h1 { font-size: clamp(28px, 8vw, 44px); }
+      .cs-services {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 18px;
+        row-gap: 8px;
+      }
+      .cs-services li { font-size: 13px; }
+      .cs-bento { padding: 0 14px 80px; gap: 36px; }
+      .cs-block { border-radius: 10px; }
+      .cs-body-serif { font-size: clamp(24px, 6.5vw, 38px); padding: 12px 0; }
+      .cs-colors { gap: 6px; }
+      .cs-color-item { gap: 8px; }
+      .cs-color-label { font-size: clamp(9px, 2vw, 13px); line-height: 1.2; }
     }
   </style>
 </head>
-<body>
+<body class="case-study">
   <header class="site-nav">
     <a class="logo" href="../" aria-label="Infinite Fun home">
       <img src="../assets/iflogo.png" alt="Infinite Fun" />
@@ -52,10 +216,96 @@
     <a class="nav-link" href="../#inquire">Inquire</a>
   </header>
 
-  <main class="cs-page">
-    <a href="../" class="cs-back">← Back to work</a>
-    <h1>Case Study 06</h1>
-    <p class="placeholder">Case study content coming soon.</p>
+  <main class="case-page">
+    <section class="cs-hero">
+      <video src="../assets/casestudies/foundation.mp4"
+             autoplay muted loop playsinline preload="auto"></video>
+    </section>
+
+    <section class="cs-intro">
+      <h1>We developed a brand identity and designed their app from scratch for <span class="serif">FOUNDATION</span>, a music education company.</h1>
+      <hr class="cs-intro-divider" />
+      <ul class="cs-services">
+        <li>Brand Identity</li>
+        <li>App Design</li>
+        <li>UX/UI Design</li>
+        <li>Onboarding Design</li>
+        <li>Website Design</li>
+        <li>Brand Strategy</li>
+        <li>Logo</li>
+        <li>Wordmark</li>
+        <li>Brand Blueprint</li>
+        <li>Social Media Templates</li>
+        <li>Digital Design</li>
+      </ul>
+      <hr class="cs-intro-divider" />
+    </section>
+
+    <section class="cs-bento">
+      <div class="cs-block cs-block--logo">
+        <img src="../assets/foundation/logo.png" alt="FOUNDATION logo" />
+      </div>
+
+      <p class="cs-body-serif">We wanted to create a visually stunning and digestible brand, that would both be cool to look at as well as be useful in educating the user on the nuances of the music business.</p>
+
+      <div class="cs-colors">
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/foundation/color1.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #0001E4">HEX: 0001E4<br />NEON BLUE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/foundation/color2.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #6377FE">HEX: 6377FE<br />DAWN SKY</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/foundation/color3.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #DDFA7B">HEX: DDFA7B<br />ELECTRIC</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color"><img src="../assets/foundation/color4.png" alt="" /></div>
+          <p class="cs-color-label" style="color: #37FF9D">HEX: 37FF9D<br />NEON</p>
+        </div>
+      </div>
+
+      <div class="cs-block cs-block--app">
+        <img src="../assets/foundation/app.png" alt="FOUNDATION app" />
+      </div>
+
+      <p class="cs-body-serif">Hundreds of unique shapes and diagrams were made in order to make each slide feel like a unique moment for the learner.</p>
+
+      <div class="cs-block cs-block--shapes">
+        <img src="../assets/foundation/shapes.png" alt="FOUNDATION shapes and diagrams" />
+      </div>
+
+      <div class="cs-block cs-block--ads">
+        <img src="../assets/foundation/ads.png" alt="FOUNDATION ads" />
+      </div>
+
+      <div class="cs-block cs-block--web">
+        <img src="../assets/foundation/web.png" alt="FOUNDATION website" />
+      </div>
+
+      <a href="../" class="cs-back">← Back to work</a>
+    </section>
   </main>
+  <script>
+    (function setupCaseStudyReveals() {
+      if (!("IntersectionObserver" in window)) return;
+      const targets = document.querySelectorAll(".cs-intro > *, .cs-bento > *");
+      targets.forEach((el) => el.classList.add("fade-in"));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
 </body>
 </html>
