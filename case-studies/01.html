@@ -189,7 +189,7 @@
       object-fit: cover;
     }
 
-    /* Color swatches row */
+    /* Color swatches row with hex/name labels */
     .cs-colors {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -198,6 +198,12 @@
       border-radius: 0;
       overflow: visible;
       background: transparent;
+    }
+    .cs-color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 1.4vw, 22px);
     }
     .cs-color {
       aspect-ratio: 1 / 1;
@@ -208,6 +214,18 @@
     .cs-color[data-name="color2"] { background: #082659; }
     .cs-color[data-name="color3"] { background: #E8E3D2; }
     .cs-color[data-name="color4"] { background: #C6C6C6; }
+    .cs-color-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-style: normal;
+      font-size: clamp(28px, 2.4vw, 40px);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
 
     .cs-back {
       display: inline-flex;
@@ -249,7 +267,9 @@
       .cs-block--wordmark { aspect-ratio: 2.6 / 1; }
       .cs-block--face,
       .cs-block--coin { aspect-ratio: 1 / 1; }
-      .cs-colors { gap: 10px; }
+      .cs-colors { gap: 6px; }
+      .cs-color-item { gap: 8px; }
+      .cs-color-label { font-size: clamp(9px, 2vw, 13px); line-height: 1.2; }
     }
   </style>
 </head>
@@ -315,10 +335,22 @@
       </div>
 
       <div class="cs-colors">
-        <div class="cs-color" data-name="color1" aria-label="#041531"></div>
-        <div class="cs-color" data-name="color2" aria-label="#082659"></div>
-        <div class="cs-color" data-name="color3" aria-label="#E8E3D2"></div>
-        <div class="cs-color" data-name="color4" aria-label="#C6C6C6"></div>
+        <div class="cs-color-item">
+          <div class="cs-color" data-name="color1" aria-label="#041531"></div>
+          <p class="cs-color-label" style="color: #FFFFFF">HEX: 041531<br />MIDNIGHT NAVY</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color" data-name="color2" aria-label="#082659"></div>
+          <p class="cs-color-label" style="color: #082659">HEX: 082659<br />VAULT BLUE</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color" data-name="color3" aria-label="#E8E3D2"></div>
+          <p class="cs-color-label" style="color: #E8E3D2">HEX: E8E3D2<br />PARCHMENT</p>
+        </div>
+        <div class="cs-color-item">
+          <div class="cs-color" data-name="color4" aria-label="#C6C6C6"></div>
+          <p class="cs-color-label" style="color: #C6C6C6">HEX: C6C6C6<br />STEEL GREY</p>
+        </div>
       </div>
 
       <div class="cs-block">
